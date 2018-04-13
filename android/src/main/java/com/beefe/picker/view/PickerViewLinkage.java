@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.graphics.Typeface;
 
 import com.beefe.picker.R;
 import com.facebook.react.bridge.ReadableArray;
@@ -13,7 +14,6 @@ import com.facebook.react.bridge.ReadableMapKeySetIterator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 /**
  * Created by <a href="https://github.com/shexiaoheng">heng</a> on 2016/09/01
  *
@@ -304,7 +304,7 @@ public class PickerViewLinkage extends LinearLayout {
                     if(selectTwoIndex >= arrTwoSize){
                         selectTwoIndex = arrTwoSize - 1;
                     }
-                    
+
                     returnData = new ReturnData();
                     returnData.setItem(oneList.get(selectOneIndex));
                     returnData.setIndex(loopViewOne.getSelectedIndex());
@@ -629,6 +629,20 @@ public class PickerViewLinkage extends LinearLayout {
                 loopViewThree.setTextColor(color);
                 break;
         }
+    }
+
+    public void setTypeface(Typeface tf){
+      switch (curRow) {
+          case 2:
+              loopViewOne.setTypeface(tf);
+              loopViewTwo.setTypeface(tf);
+              break;
+          case 3:
+              loopViewOne.setTypeface(tf);
+              loopViewTwo.setTypeface(tf);
+              loopViewThree.setTypeface(tf);
+              break;
+      }
     }
 
     public void setIsLoop(boolean isLoop) {

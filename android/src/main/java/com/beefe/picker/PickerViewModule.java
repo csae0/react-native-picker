@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.graphics.Typeface;
 
 import com.beefe.picker.util.MIUIUtils;
 import com.beefe.picker.view.OnSelectedListener;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 
 import static android.graphics.Color.argb;
 
+import android.util.Log;
 /**
  * Author: <a href="https://github.com/shexiaoheng">heng</a>
  * <p>
@@ -110,6 +112,8 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
 
     private static final String ERROR_NOT_INIT = "please initialize the component first";
 
+    private static final String PICKER_FONT_FAMILY = "pickerFontFamily";
+
     private Dialog dialog = null;
 
     private boolean isLoop = true;
@@ -179,6 +183,17 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
                 confirmTV.setTextSize(toolBarTextSize);
             }
 
+            if (options.hasKey(PICKER_FONT_FAMILY)) {
+              try {
+                Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/" + options.getString(PICKER_FONT_FAMILY) + ".otf");
+                cancelTV.setTypeface(tf);
+                titleTV.setTypeface(tf);
+                confirmTV.setTypeface(tf);
+                Log.i("#FONT-FAMILY#", "SUCCESS");
+              } catch (Exception e) {
+                Log.i("#FONT-FAMILY#", "ERROR");
+              }
+            }
             if (options.hasKey(PICKER_CONFIRM_BTN_TEXT)) {
                 confirmText = options.getString(PICKER_CONFIRM_BTN_TEXT);
             }
@@ -291,10 +306,16 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
                 }
             }
 
+            String pickerFontFamily = "";
+            if (options.hasKey(PICKER_FONT_FAMILY)) {
+              pickerFontFamily = options.getString(PICKER_FONT_FAMILY);
+            }
+
             ReadableArray pickerData = options.getArray(PICKER_DATA);
 
             int pickerViewHeight;
             String name = pickerData.getType(0).name();
+            Log.i("#FONT-FAMILY#", "SWITCH " + name);
             switch (name) {
                 case "Map":
                     curStatus = 1;
@@ -304,6 +325,14 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
                     pickerViewLinkage.setPickerData(pickerData, weights);
                     pickerViewLinkage.setTextColor(pickerTextColor);
                     pickerViewLinkage.setTextSize(pickerTextSize);
+                    if (pickerFontFamily.length() > 0) {
+                      try {
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/" + options.getString(PICKER_FONT_FAMILY) + ".otf");
+                        pickerViewLinkage.setTypeface(tf);
+                      } catch (Exception e) {
+                        Log.i("#FONT-FAMILY#", "ERROR");
+                      }
+                    }
                     pickerViewLinkage.setTextEllipsisLen(pickerTextEllipsisLen);
                     pickerViewLinkage.setIsLoop(isLoop);
 
@@ -324,6 +353,14 @@ public class PickerViewModule extends ReactContextBaseJavaModule implements Life
                     pickerViewAlone.setPickerData(pickerData, weights);
                     pickerViewAlone.setTextColor(pickerTextColor);
                     pickerViewAlone.setTextSize(pickerTextSize);
+                    if (pickerFontFamily.length() > 0) {
+                      try {
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/" + options.getString(PICKER_FONT_FAMILY) + ".otf");
+                        pickerViewAlone.setTypeface(tf);
+                      } catch (Exception e) {
+                        Log.i("#FONT-FAMILY#", "ERROR");
+                      }
+                    }
                     pickerViewAlone.setTextEllipsisLen(pickerTextEllipsisLen);
                     pickerViewAlone.setIsLoop(isLoop);
 

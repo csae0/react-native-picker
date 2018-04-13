@@ -5,13 +5,13 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.graphics.Typeface;
 
 import com.beefe.picker.R;
 import com.facebook.react.bridge.ReadableArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 /**
  * Created by <a href="https://github.com/shexiaoheng">heng</a> on 16/9/6.
  * <p>
@@ -210,6 +210,17 @@ public class PickerViewAlone extends LinearLayout {
                 loopView.setTextSize(size);
             }
         }
+    }
+
+    public void setTypeface(Typeface tf){
+      int viewCount = pickerViewAloneLayout.getChildCount();
+      for (int i = 0; i < viewCount; i++) {
+        View view = pickerViewAloneLayout.getChildAt(i);
+        if (view instanceof LoopView) {
+            LoopView loopView = (LoopView) view;
+            loopView.setTypeface(tf);
+        }
+      }
     }
 
     public void setTextEllipsisLen(int len){

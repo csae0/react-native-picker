@@ -17,7 +17,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-
 /**
  * Edited by <a href="https://github.com/shexiaoheng">heng</a> on 2016/10/20
  * 1. Added method getY
@@ -217,6 +216,12 @@ public class LoopView extends View {
         }
     }
 
+    public void setTypeface(Typeface tf) {
+      paintOuterText.setTypeface(tf);
+      paintCenterText.setTypeface(tf);
+      invalidate();
+    }
+
     public final void setTextEllipsisLen(int len){
         textEllipsisLen = len;
     }
@@ -280,7 +285,7 @@ public class LoopView extends View {
         }
     }
 
-    protected final void drawText(Canvas canvas, String text, float posX, float posY, Paint paint) {
+    protected void drawText(Canvas canvas, String text, float posX, float posY, Paint paint) {
         StringBuffer stringBuffer = new StringBuffer();
         char[] array = text.toCharArray();
         int sum = 0;
