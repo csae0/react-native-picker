@@ -18,6 +18,19 @@
     self = [super initWithFrame:frame];
     if (self)
     {
+        // Handle orientation
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self selector:@selector(orientationChanged:)
+         name:UIDeviceOrientationDidChangeNotification
+         object:[UIDevice currentDevice]];
+        
+        // init
+        if ([[UIDevice currentDevice].systemVersion doubleValue] >= 9.0 ) {
+            self.height=250;
+        }else{
+            self.height=220;
+        }
         self.backArry=[[NSMutableArray alloc]init];
         self.provinceArray=[[NSMutableArray alloc]init];
         self.cityArray=[[NSMutableArray alloc]init];
@@ -40,12 +53,27 @@
     }
     return self;
 }
+
+- (void) orientationChanged:(NSNotification *)note
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.hidden == NO) {
+            [UIView animateWithDuration:.2f animations:^{
+                [self setFrame:CGRectMake(0, SCREEN_HEIGHT-self.height, SCREEN_WIDTH, self.height)];
+                [self.pick setFrame:CGRectMake(0, 40, self.frame.size.width, self.frame.size.height - 40)];
+                [self.pickHeader setFrame:CGRectMake(0,0, self.frame.size.width, 40)];
+                [self.rightBtn setFrame:CGRectMake(self.pickHeader.frame.size.width-90,0, 90, 40)];
+            }];
+        }
+    });
+}
+
 -(void)makeuiWith:(NSArray *)topbgColor With:(NSArray *)bottombgColor With:(NSArray *)leftbtnbgColor With:(NSArray *)rightbtnbgColor With:(NSArray *)centerbtnColor
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.frame.size.width, 40)];
-    view.backgroundColor = [UIColor cyanColor];
+    self.pickHeader = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.frame.size.width, 40)];
+    self.pickHeader.backgroundColor = [UIColor cyanColor];
     
-    [self addSubview:view];
+    [self addSubview:self.pickHeader];
     
     self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.leftBtn.frame = CGRectMake(0, 0, 90, 40);
@@ -57,19 +85,19 @@
     
     [self.leftBtn setTitleColor:[self colorWith:leftbtnbgColor] forState:UIControlStateNormal];
     
-    [view addSubview:self.leftBtn];
+    [self.pickHeader addSubview:self.leftBtn];
     
-    view.backgroundColor=[self colorWith:topbgColor];
+    self.pickHeader.backgroundColor=[self colorWith:topbgColor];
     
     self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.rightBtn.frame = CGRectMake(view.frame.size.width-90,0, 90, 40);
+    self.rightBtn.frame = CGRectMake(self.pickHeader.frame.size.width-90,0, 90, 40);
     [self.rightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10.0)];
     [self.rightBtn setTitle:self.rightStr forState:UIControlStateNormal];
     self.rightBtn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
     
     [self.rightBtn setTitleColor:[self colorWith:rightbtnbgColor] forState:UIControlStateNormal];
     
-    [view addSubview:self.rightBtn];
+    [self.pickHeader addSubview:self.rightBtn];
     [self.rightBtn setFont:[UIFont systemFontOfSize:[_pickerToolBarFontSize integerValue]]];
     [self.rightBtn addTarget:self action:@selector(cfirmAction) forControlEvents:UIControlEventTouchUpInside];  
     
@@ -83,7 +111,7 @@
     
     [cenLabel setTextColor:[self colorWith:centerbtnColor]];
     
-    [view addSubview:cenLabel];
+    [self.pickHeader addSubview:cenLabel];
 
     self.pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 40, self.frame.size.width, self.frame.size.height - 40)];
     self.pick.delegate = self;
@@ -612,8 +640,8 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:.2f animations:^{
-            [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 250)];
-        } completion:^(BOOL finished){ self.pick.hidden=YES; }];
+            [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, self.height)];
+        } completion:^(BOOL finished){ self.pick.hidden=YES; self.hidden=YES; }];
     });
 }
 //按了确定按钮
@@ -648,8 +676,8 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:.2f animations:^{
-            [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 250)];
-        } completion:^(BOOL finished){ self.pick.hidden=YES; }];
+            [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, self.height)];
+        } completion:^(BOOL finished){ self.pick.hidden=YES; self.hidden=YES; }];
     });
 }
 -(void)selectRow

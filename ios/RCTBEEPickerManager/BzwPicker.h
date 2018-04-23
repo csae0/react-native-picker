@@ -17,6 +17,8 @@ typedef void(^backBolock)(NSDictionary * );
 @interface BzwPicker : UIView<UIPickerViewDataSource,UIPickerViewDelegate>
 
 @property (strong,nonatomic)UIPickerView *pick;
+@property (strong,nonatomic)UIView *pickHeader;
+@property(nonatomic,assign)float height;
 
 @property(nonatomic,copy)backBolock bolock;
 
@@ -43,8 +45,6 @@ typedef void(^backBolock)(NSDictionary * );
 @property(strong,nonatomic)NSString *pickerFontSize;
 @property(strong,nonatomic)NSArray *pickerFontColor;
 @property(strong,nonatomic)NSString *pickerRowHeight;
-
-
 
 @property(assign,nonatomic)BOOL Correlation;//判断有没有没有关联
 
