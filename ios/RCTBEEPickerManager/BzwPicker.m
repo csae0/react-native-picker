@@ -612,13 +612,9 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:.2f animations:^{
-            
             [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 250)];
-            
-        }];
+        } completion:^(BOOL finished){ self.pick.hidden=YES; }];
     });
-
-    self.pick.hidden=YES;
 }
 //按了确定按钮
 -(void)cfirmAction
@@ -652,9 +648,8 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:.2f animations:^{
-            
             [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 250)];
-        }];
+        } completion:^(BOOL finished){ self.pick.hidden=YES; }];
     });
 }
 -(void)selectRow
