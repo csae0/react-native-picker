@@ -101,13 +101,16 @@ RCT_EXPORT_METHOD(show){
     if (self.pick) {
 
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.pick.hidden=NO;
+            self.pick.pick.hidden=NO;
             [UIView animateWithDuration:.3 animations:^{
 
                 [_pick setFrame:CGRectMake(0, SCREEN_HEIGHT-self.height, SCREEN_WIDTH, self.height)];
 
             }];
         });
-    }return;
+    }
+    return;
 }
 
 RCT_EXPORT_METHOD(hide){
@@ -116,11 +119,9 @@ RCT_EXPORT_METHOD(hide){
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIView animateWithDuration:.3 animations:^{
                 [_pick setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, self.height)];
-            }];
+            } completion:^(BOOL finished){ self.pick.hidden=YES; }];
         });
     }
-
-    self.pick.hidden=YES;
 
 	return;
 }
