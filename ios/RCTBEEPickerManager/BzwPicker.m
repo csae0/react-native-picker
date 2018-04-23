@@ -106,17 +106,17 @@
 
     [self.rightBtn addTarget:self action:@selector(cfirmAction) forControlEvents:UIControlEventTouchUpInside];  
     
-    UILabel *cenLabel=[[UILabel alloc]initWithFrame:CGRectMake(90, 5, SCREEN_WIDTH-220, 30)];
+    self.cenLabel=[[UILabel alloc]initWithFrame:CGRectMake(90, 5, SCREEN_WIDTH-220, 30)];
     
-    cenLabel.textAlignment=NSTextAlignmentCenter;
+    self.cenLabel.textAlignment=NSTextAlignmentCenter;
     
-    [cenLabel setFont:[UIFont systemFontOfSize:[_pickerToolBarFontSize integerValue]]];
+    [self.cenLabel setFont:[UIFont systemFontOfSize:[_pickerToolBarFontSize integerValue]]];
     
-    cenLabel.text=self.centStr;
+    self.cenLabel.text=self.centStr;
     
-    [cenLabel setTextColor:[self colorWith:centerbtnColor]];
+    [self.cenLabel setTextColor:[self colorWith:centerbtnColor]];
     
-    [self.pickHeader addSubview:cenLabel];
+    [self.pickHeader addSubview:self.cenLabel];
 
     self.pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 40, self.frame.size.width, self.frame.size.height - 40)];
     self.pick.delegate = self;
