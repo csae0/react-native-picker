@@ -1,17 +1,48 @@
 {
-  "name": "react-native-picker",
-  "version": "4.3.5",
+  "_args": [
+    [
+      "github:csae0/react-native-picker#master",
+      "/Users/florian/Documents/_git/easily"
+    ]
+  ],
+  "_from": "github:csae0/react-native-picker#master",
+  "_id": "react-native-picker@github:csae0/react-native-picker#d968c30a49ddeac825f1717a2a093efa696c1cce",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/react-native-picker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "github:csae0/react-native-picker#master",
+    "rawSpec": "github:csae0/react-native-picker#master",
+    "saveSpec": "github:csae0/react-native-picker#master",
+    "fetchSpec": null,
+    "gitCommittish": "master"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "github:csae0/react-native-picker#d968c30a49ddeac825f1717a2a093efa696c1cce",
+  "_spec": "github:csae0/react-native-picker#master",
+  "_where": "/Users/florian/Documents/_git/easily",
+  "author": {
+    "name": "zooble"
+  },
+  "bugs": {
+    "url": "https://github.com/beefe/react-native-picker/issues"
+  },
   "description": "A Native Picker with high performance.",
+  "homepage": "https://github.com/beefe/react-native-picker",
+  "license": "MIT",
   "main": "index.js",
-  "types": "index.d.ts",
+  "name": "react-native-picker",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/beefe/react-native-picker.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:beefe/react-native-picker.git"
-  },
-  "author": "zooble",
-  "license": "MIT",
-  "homepage": "https://github.com/beefe/react-native-picker"
+  "types": "index.d.ts",
+  "version": "4.3.5"
 }
