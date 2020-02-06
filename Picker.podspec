@@ -14,9 +14,7 @@ Pod::Spec.new do |s|
   s.platform       = :ios, '7.0'
   s.preserve_paths = '*.js'
 
-  s.subspec 'Core' do |ss|
-    ss.source_files = 'ios/RCTBEEPickerManager/*.{h,m}'
-    ss.public_header_files = ['ios/RCTBEEPickerManager/*.h']
-  end
-
+  s.source_files  = "ios/**/*.{h,m}"
+  
+  s.dependency 'React'
 end
